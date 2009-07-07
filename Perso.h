@@ -32,10 +32,10 @@ class Perso: public Moving_Rect {
 protected:
 	std::vector <sf::Image*> * images;
 	int nb_fly_img;
-    float current_image;//number of current image
-    int direction;//1 or -1
-    float attacking;//0 : nothing, ]0;1] 1st pic, ]1;3] 2nd pic <0 : attacked, ]3;8] after attack
-    Item *holding;//which item is it holding ?
+	float current_image;//number of current image
+	int direction;//1 or -1
+	float attacking;//0 : nothing, ]0;1] 1st pic, ]1;3] 2nd pic <0 : attacked, ]3;8] after attack
+	Item *holding;//which item is it holding ?
 	sf::Sound *snd_block;
 	sf::Sound *snd_attack;
 public:

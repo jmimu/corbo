@@ -1,12 +1,12 @@
-Craw/Corbo
-Copyright (C) 2008 Jean-Michael MULLER (jean-michael.muller@laposte.net)
+Corbo
+Copyright (C) 2008 JMIMU (jmimu@free.fr)
 
 
 Intro :
 	Jeu réalisé pour le défi "Novendiales 4" sur le thème "Noir et Blanc".
 	Des Sprites sont issus d'anciens épisodes des jeux "Castelvania",
 	et du site www.outer-court.com .
-	Les sons viennent du jeu GPL "Tupertux".
+	Les sons viennent du jeu GPL "Supertux".
 	Le jeu a été codé en C++ avec la bibliothèque SFML (www.sfml-dev.org).
 	Fait sous Debian GNU/Linux, avec les logiciels libres gcc, gdb, make,
 	vim,geany, eclipse, Gimp et kolourPaint.
@@ -20,7 +20,7 @@ Démarrage :
 
 Instructions :
 	Des objets sont déposés dans toute l'aire de jeu.
-	Le joueur incarne un corbeau devant en rapporter un maximun à la
+	Le joueur incarne un corbeau devant en rapporter un maximum à la
 	princesse qui les attend du côté gauche du terrain.
 	Une horde de chauves-souris essaie de les apporter à l'infâme
 	conspirateur à droite de l'écran.

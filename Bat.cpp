@@ -33,14 +33,9 @@ sf::Sound Bat::stat_snd_block;
 sf::Sound Bat::stat_snd_attack;
 sf::Sound Bat::stat_snd_point;
 
-/*Bat::Bat() {
-	// TODO Auto-generated constructor stub
-
-}*/
 
 Bat::Bat(float x1,float y1,float sx1,float sy1):Perso(x1,y1,sx1,sy1,NULL),target(NULL),ia_vx(0),
 	ia_vy(0) {
-	// TODO Auto-generated constructor stub
 	nb_fly_img=10;
 	if (!pic_loaded) load_pic();
 	images=&pics;
@@ -49,7 +44,7 @@ Bat::Bat(float x1,float y1,float sx1,float sy1):Perso(x1,y1,sx1,sy1,NULL),target
 }
 
 Bat::~Bat() {
-	// TODO Auto-generated destructor stub
+  //cout<<"destroy bat\n";
 	unload_pic();
 }
 
@@ -131,6 +126,7 @@ void Bat::find_target(std::vector <Moving_Rect*> &targets,float max_x)
 
 void Bat::load_pic()
 {
+  //cout<<"Bat load pics\n";
 	sndBuffer1=new sf::SoundBuffer();
 	sndBuffer1->LoadFromFile("data/sound/hurt.wav");
 	stat_snd_block.SetBuffer(*sndBuffer1);
@@ -185,11 +181,15 @@ void Bat::load_pic()
 
 void Bat::unload_pic()
 {
-	if (!pic_loaded) return;
+  //cout<<"del bat ?\n";
+    if (!pic_loaded) return;
     for (unsigned int i=0;i<Bat::pics.size();i++)
     {
     	delete Bat::pics[i];
-    	//cout<<" del";
     }
+    delete sndBuffer1;
+    delete sndBuffer2;
+    delete sndBuffer3;
     pic_loaded=false;
+    //cout<<" del\n";
 }

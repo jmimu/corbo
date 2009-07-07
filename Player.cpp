@@ -33,13 +33,8 @@ sf::Sound Player::stat_snd_block;
 sf::Sound Player::stat_snd_attack;
 sf::Sound Player::stat_snd_point;
 
-/*Player::Player() {
-	// TODO Auto-generated constructor stub
-	if (!pic_loaded) load_pic();
-}*/
 
 Player::Player(float x1,float y1,float sx1,float sy1):Perso(x1,y1,sx1,sy1,NULL) {
-	// TODO Auto-generated constructor stub
 	nb_fly_img=4;
 	if (!pic_loaded) load_pic();
 	images=&pics;
@@ -48,8 +43,8 @@ Player::Player(float x1,float y1,float sx1,float sy1):Perso(x1,y1,sx1,sy1,NULL) 
 }
 
 Player::~Player() {
-	// TODO Auto-generated destructor stub
-	unload_pic();
+  //cout<<"destroy player\n";
+  unload_pic();
 }
 
 void Player::control(sf::RenderWindow &App,std::vector <Item*> &items,std::vector <Perso*> &targets)
@@ -73,7 +68,7 @@ void Player::control(sf::RenderWindow &App,std::vector <Item*> &items,std::vecto
         		vy=-5;
         	if (App.GetInput().IsKeyDown(sf::Key::Down))
         		vy=5;
-        	if (App.GetInput().IsKeyDown(sf::Key::Space))
+        	if (App.GetInput().IsKeyDown(sf::Key::LControl))
         		button=true;
         	else button=App.GetInput().IsJoystickButtonDown(0, 1);
         }
@@ -83,7 +78,8 @@ void Player::control(sf::RenderWindow &App,std::vector <Item*> &items,std::vecto
 
 void Player::load_pic()
 {
-	sndBuffer1=new sf::SoundBuffer();
+  //cout<<"Player load pics\n";
+  	sndBuffer1=new sf::SoundBuffer();
 	sndBuffer1->LoadFromFile("data/sound/hurt.wav");
 	stat_snd_block.SetBuffer(*sndBuffer1);
 	//stat_snd_block.Play();
@@ -97,7 +93,7 @@ void Player::load_pic()
 	sndBuffer3->LoadFromFile("data/sound/lifeup.wav");
 	stat_snd_point.SetBuffer(*sndBuffer3);
 	//stat_snd_attack.Play();
-
+	
     sf::Image * img1=new sf::Image();
     img1->LoadFromFile("data/raven/flyA1.png");
     pics.push_back(img1);
@@ -122,14 +118,16 @@ void Player::load_pic()
 
 void Player::unload_pic()
 {
-	if (!pic_loaded) return;
+  //cout<<"del player ?\n";
+    if (!pic_loaded) return;
     for (unsigned int i=0;i<Player::pics.size();i++)
     {
     	delete Player::pics[i];
-    	//cout<<" del";
     }
     delete sndBuffer1;
     delete sndBuffer2;
+    delete sndBuffer3;
     pic_loaded=false;
+    //cout<<" del\n";
 }
 

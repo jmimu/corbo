@@ -1,0 +1,9 @@
+Bugs :
+
+* Bats bloquées à gauche
+* Crane qui entre et sort de la zone externe est bloqué mais pas
+   compté
+* IA
+* AL lib: alBuffer.c:1097: exit() 6 Buffer(s) NOT deleted
+* Images de Malaga ?
+
