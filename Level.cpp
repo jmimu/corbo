@@ -24,7 +24,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 using namespace std;
 
-Level::Level():player(720,150,20,15),cam(1800,400),Princess(100,0,32,48),
+Level::Level():player(720,150,33,15),cam(1800,400),Princess(100,0,32,48),
 BadBoy(1700,0,32,48),people_area(150),score_p1(0),score_p2(0) {
 	// TODO Auto-generated constructor stub
 	Rect *wall1=new Rect(0,0,1,400);

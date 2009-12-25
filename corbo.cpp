@@ -39,7 +39,7 @@ int main(void) {
 
 	//sf::RenderWindow App(sf::VideoMode(640, 400, 32), "Corbeau", sf::Style::Fullscreen);
 	sf::RenderWindow App(sf::VideoMode(640, 400, 32), "Corbeau");
-	float FPS=40;
+	float FPS=50.;
     App.SetFramerateLimit(FPS);
 
     sf::Font Cheeseburger;
@@ -49,31 +49,20 @@ int main(void) {
     sf::Image TitleImage;
     TitleImage.LoadFromFile("data/Crow.png");
     sf::Sprite Title(TitleImage);
-
-       	sf::String txt_begin;
-       	txt_begin.SetFont(Cheeseburger);
-       	txt_begin.SetSize(20.f);
-       	txt_begin.SetColor(sf::Color(250, 250, 250));
-       	txt_begin.SetText("Left Ctrl to attack\nEsc to quit");
-   	
-	sf::Event Event;
-	bool running2=true;
-       	float t=0;
-	while (running2)
-	{
-       		t=t+0.03;
-       		//txt_begin.SetSize(20+2*sin(t));
-		txt_begin.SetPosition(160.f-40*sin(t*0.56), 340.f-5*sin(t*5));
-		App.Draw(Title);
-       		App.Draw(txt_begin);
-		App.Display();
-		while (App.GetEvent(Event))
-			if ((Event.Type==sf::Event::Closed)||((Event.Type==sf::Event::KeyPressed)&&(Event.Key.Code==sf::Key::Escape)))
-				return EXIT_SUCCESS;
-		if (App.GetInput().IsJoystickButtonDown(0, 1)) running2=false;
-		if (App.GetInput().IsKeyDown(sf::Key::LControl)) running2=false;
-	}
-
+    App.Draw(Title);
+    App.Display();
+    {
+    	sf::Event Event;
+    	bool running2=true;
+    	while (running2)
+    	{
+			while (App.GetEvent(Event))
+				if ((Event.Type==sf::Event::Closed)||((Event.Type==sf::Event::KeyPressed)&&(Event.Key.Code==sf::Key::Escape)))
+					return EXIT_SUCCESS;
+			if (App.GetInput().IsJoystickButtonDown(0, 1)) running2=false;
+			if (App.GetInput().IsKeyDown(sf::Key::Space)) running2=false;
+    	}
+    }
 
     //game
     sf::String txt_score;
@@ -138,8 +127,7 @@ int main(void) {
         	{
         		t=t+0.1;
         		txt_end.SetSize(20+2*sin(t));
-			txt_end.SetPosition(50.f-(0+2*sin(t)), 50.f-(0+1.5*sin(t)));
-			level1.draw(App);
+            	txt_end.SetPosition(50.f-(0+2*sin(t)), 50.f-(0+1.5*sin(t)));
         		App.Draw(txt_end);
         		App.Display();
         		while (App.GetEvent(Event))
@@ -148,7 +136,7 @@ int main(void) {
         		if (wait_time>100)
         		{
         			if (App.GetInput().IsJoystickButtonDown(0, 1)) running2=false;
-        			if (App.GetInput().IsKeyDown(sf::Key::LControl)) running2=false;
+        			if (App.GetInput().IsKeyDown(sf::Key::Space)) running2=false;
         		}
         		wait_time+=1;
         	}

@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+#include <sstream>
 #include "Bat.h"
 
 using namespace std;
@@ -33,10 +34,15 @@ sf::Sound Bat::stat_snd_block;
 sf::Sound Bat::stat_snd_attack;
 sf::Sound Bat::stat_snd_point;
 
+/*Bat::Bat() {
+	// TODO Auto-generated constructor stub
+
+}*/
 
 Bat::Bat(float x1,float y1,float sx1,float sy1):Perso(x1,y1,sx1,sy1,NULL),target(NULL),ia_vx(0),
 	ia_vy(0) {
-	nb_fly_img=10;
+	// TODO Auto-generated constructor stub
+	nb_fly_img=31;
 	if (!pic_loaded) load_pic();
 	images=&pics;
 	snd_block=&stat_snd_block;
@@ -44,7 +50,7 @@ Bat::Bat(float x1,float y1,float sx1,float sy1):Perso(x1,y1,sx1,sy1,NULL),target
 }
 
 Bat::~Bat() {
-  //cout<<"destroy bat\n";
+	// TODO Auto-generated destructor stub
 	unload_pic();
 }
 
@@ -126,7 +132,6 @@ void Bat::find_target(std::vector <Moving_Rect*> &targets,float max_x)
 
 void Bat::load_pic()
 {
-  //cout<<"Bat load pics\n";
 	sndBuffer1=new sf::SoundBuffer();
 	sndBuffer1->LoadFromFile("data/sound/hurt.wav");
 	stat_snd_block.SetBuffer(*sndBuffer1);
@@ -139,57 +144,32 @@ void Bat::load_pic()
 	sndBuffer3->LoadFromFile("data/sound/lifeup.wav");
 	stat_snd_point.SetBuffer(*sndBuffer3);
 
-    sf::Image * img1=new sf::Image();
-    img1->LoadFromFile("data/bat/flyA1.png");
-    pics.push_back(img1);
-    sf::Image * img2=new sf::Image();
-    img2->LoadFromFile("data/bat/flyA2.png");
-    pics.push_back(img2);
-    sf::Image * img3=new sf::Image();
-    img3->LoadFromFile("data/bat/flyA3.png");
-    pics.push_back(img3);
-    sf::Image * img4=new sf::Image();
-    img4->LoadFromFile("data/bat/flyA4.png");
-    pics.push_back(img4);
-    sf::Image * img5=new sf::Image();
-    img5->LoadFromFile("data/bat/flyA5.png");
-    pics.push_back(img5);
-    sf::Image * img6=new sf::Image();
-    img6->LoadFromFile("data/bat/flyA6.png");
-    pics.push_back(img6);
-    sf::Image * img7=new sf::Image();
-    img7->LoadFromFile("data/bat/flyA7.png");
-    pics.push_back(img7);
-    sf::Image * img8=new sf::Image();
-    img8->LoadFromFile("data/bat/flyA8.png");
-    pics.push_back(img8);
-    sf::Image * img9=new sf::Image();
-    img9->LoadFromFile("data/bat/flyA9.png");
-    pics.push_back(img9);
-    sf::Image * img10=new sf::Image();
-    img10->LoadFromFile("data/bat/flyA10.png");
-    pics.push_back(img10);
+
+	for (unsigned int i=0;i<31;i++)
+	{
+		sf::Image * img1=new sf::Image();
+		ostringstream oss;
+		oss<<"data/bat/vol"<<i+100<<".png",
+		img1->LoadFromFile(oss.str());
+		pics.push_back(img1);
+	}
 
     sf::Image * img11=new sf::Image();
-    img11->LoadFromFile("data/bat/attack1.png");
+    img11->LoadFromFile("data/bat/vol100.png");
     pics.push_back(img11);
     sf::Image * img12=new sf::Image();
-    img12->LoadFromFile("data/bat/attack2.png");
+    img12->LoadFromFile("data/bat/vol102.png");
     pics.push_back(img12);
     pic_loaded=true;
 }
 
 void Bat::unload_pic()
 {
-  //cout<<"del bat ?\n";
-    if (!pic_loaded) return;
+	if (!pic_loaded) return;
     for (unsigned int i=0;i<Bat::pics.size();i++)
     {
     	delete Bat::pics[i];
+    	//cout<<" del";
     }
-    delete sndBuffer1;
-    delete sndBuffer2;
-    delete sndBuffer3;
     pic_loaded=false;
-    //cout<<" del\n";
 }

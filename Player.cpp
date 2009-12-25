@@ -21,6 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #include "Player.h"
+#include <sstream>
 
 using namespace std;
 
@@ -33,9 +34,14 @@ sf::Sound Player::stat_snd_block;
 sf::Sound Player::stat_snd_attack;
 sf::Sound Player::stat_snd_point;
 
+/*Player::Player() {
+	// TODO Auto-generated constructor stub
+	if (!pic_loaded) load_pic();
+}*/
 
 Player::Player(float x1,float y1,float sx1,float sy1):Perso(x1,y1,sx1,sy1,NULL) {
-	nb_fly_img=4;
+	// TODO Auto-generated constructor stub
+	nb_fly_img=31;
 	if (!pic_loaded) load_pic();
 	images=&pics;
 	snd_block=&stat_snd_block;
@@ -43,8 +49,8 @@ Player::Player(float x1,float y1,float sx1,float sy1):Perso(x1,y1,sx1,sy1,NULL) 
 }
 
 Player::~Player() {
-  //cout<<"destroy player\n";
-  unload_pic();
+	// TODO Auto-generated destructor stub
+	unload_pic();
 }
 
 void Player::control(sf::RenderWindow &App,std::vector <Item*> &items,std::vector <Perso*> &targets)
@@ -68,7 +74,7 @@ void Player::control(sf::RenderWindow &App,std::vector <Item*> &items,std::vecto
         		vy=-5;
         	if (App.GetInput().IsKeyDown(sf::Key::Down))
         		vy=5;
-        	if (App.GetInput().IsKeyDown(sf::Key::LControl))
+        	if (App.GetInput().IsKeyDown(sf::Key::Space))
         		button=true;
         	else button=App.GetInput().IsJoystickButtonDown(0, 1);
         }
@@ -78,8 +84,7 @@ void Player::control(sf::RenderWindow &App,std::vector <Item*> &items,std::vecto
 
 void Player::load_pic()
 {
-  //cout<<"Player load pics\n";
-  	sndBuffer1=new sf::SoundBuffer();
+	sndBuffer1=new sf::SoundBuffer();
 	sndBuffer1->LoadFromFile("data/sound/hurt.wav");
 	stat_snd_block.SetBuffer(*sndBuffer1);
 	//stat_snd_block.Play();
@@ -93,41 +98,35 @@ void Player::load_pic()
 	sndBuffer3->LoadFromFile("data/sound/lifeup.wav");
 	stat_snd_point.SetBuffer(*sndBuffer3);
 	//stat_snd_attack.Play();
-	
-    sf::Image * img1=new sf::Image();
-    img1->LoadFromFile("data/raven/flyA1.png");
-    pics.push_back(img1);
-    sf::Image * img2=new sf::Image();
-    img2->LoadFromFile("data/raven/flyA2.png");
-    pics.push_back(img2);
-    sf::Image * img3=new sf::Image();
-    img3->LoadFromFile("data/raven/flyA3.png");
-    pics.push_back(img3);
-    sf::Image * img4=new sf::Image();
-    img4->LoadFromFile("data/raven/flyA4.png");
-    pics.push_back(img4);
+
+	for (unsigned int i=0;i<31;i++)
+	{
+		sf::Image * img1=new sf::Image();
+		ostringstream oss;
+		oss<<"data/raven/vol"<<i+100<<".png",
+		img1->LoadFromFile(oss.str());
+		pics.push_back(img1);
+	}
 
     sf::Image * img5=new sf::Image();
-    img5->LoadFromFile("data/raven/attack1.png");
+    img5->LoadFromFile("data/raven/vol100.png");
     pics.push_back(img5);
     sf::Image * img6=new sf::Image();
-    img6->LoadFromFile("data/raven/attack2.png");
+    img6->LoadFromFile("data/raven/vol102.png");
     pics.push_back(img6);
     pic_loaded=true;
 }
 
 void Player::unload_pic()
 {
-  //cout<<"del player ?\n";
-    if (!pic_loaded) return;
+	if (!pic_loaded) return;
     for (unsigned int i=0;i<Player::pics.size();i++)
     {
     	delete Player::pics[i];
+    	//cout<<" del";
     }
     delete sndBuffer1;
     delete sndBuffer2;
-    delete sndBuffer3;
     pic_loaded=false;
-    //cout<<" del\n";
 }
 
